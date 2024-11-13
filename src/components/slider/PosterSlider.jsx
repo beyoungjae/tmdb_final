@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import '../css/PosterSlider.css'
-import { Navigation } from 'swiper/modules'
+import { Navigation, Autoplay } from 'swiper/modules'
 
 function PosterSlider() {
    const dispatch = useDispatch()
@@ -21,10 +21,20 @@ function PosterSlider() {
 
    return (
       <>
-         <Swiper slidesPerView={5} spaceBetween={30} navigation={true} modules={[Navigation]} className="mySwiper">
+         <Swiper
+            slidesPerView={5}
+            spaceBetween={30}
+            navigation={true}
+            autoplay={{
+               delay: 3000,
+               disableOnInteraction: false,
+            }}
+            modules={[Autoplay, Navigation]}
+            className="mySwiper"
+         >
             {movies.map((movie) => (
                <SwiperSlide key={movie.id}>
-                  <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+                  <img src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`} alt={movie.title} style={{ height: '310px' }} />
                </SwiperSlide>
             ))}
          </Swiper>
